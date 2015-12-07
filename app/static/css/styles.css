@@ -1,0 +1,17 @@
+.content {
+	padding: 1em;
+}
+
+.logo-title{
+	width: 28px;
+}
+
+.text-title {
+	height: 28px;
+	line-height: 28px;
+	vertical-align: top;
+}
+
+.input-medium {
+	width: 20em;
+}

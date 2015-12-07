@@ -21,10 +21,14 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    'title-bar-style': 'hidden'
+  });
+  // console.log(process.cwd());
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadUrl('file://' + __dirname + '/../static/html/index.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
