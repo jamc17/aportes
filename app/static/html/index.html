@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="mas">
   <head>
     <meta>
     <meta charset="UTF-8">
@@ -16,120 +16,147 @@
         </h1>
         <div></div>
       </header>
+
       <section class="window-content">
-        <div class="pane-group">
+        <div class="pane-group" ng-controller="menuController as menuCtrl">
           <div class="pane pane-sm sidebar">
-            <nav class="nav-group">
+            <!-- menu de navegación -->
+            <ul class="nav-group">
               <h5 class="nav-group-title">Menu de opciones</h5>
-              <a class="nav-group-item main-menu-item active">
-                <span class="icon icon-users"></span>
-                Aportantes
-              </a>
-              <span class="nav-group-item main-menu-item">
-                <span class="icon icon-archive"></span>
-                Aportes Mensuales
-              </span>
-              <span class="nav-group-item main-menu-item">
-                <span class="icon icon-print"></span>
-                Impresiones
-              </span>
-              <span class="nav-group-item main-menu-item">
-                <span class="icon icon-chart-area"></span>
-                Reportes
-              </span>
-              <span class="nav-group-item main-menu-item">
-                <span class="icon icon-tools"></span>
-                Configuración
-              </span>
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 1 }">
+                <a ng-click="menuCtrl.selectItem(1)">
+                  <span class="icon icon-users"></span>
+                  Aportantes
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 2 }">
+                <a ng-click="menuCtrl.selectItem(2)">
+                  <span class="icon icon-archive"></span>
+                  Aportes Mensuales
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 3 }">
+                <a ng-click="menuCtrl.selectItem(3)">
+                  <span class="icon icon-print"></span>
+                  Impresiones
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 4 }">
+                <a ng-click="menuCtrl.selectItem(4)">
+                  <span class="icon icon-chart-area"></span>
+                  Reportes
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 5 }">
+                <a ng-click="menuCtrl.selectItem(5)">
+                  <span class="icon icon-tools"></span>
+                  Configuración
+                </a>
+              </li>
             </nav>
           </div>
-
+  
           <div class="pane" id="main-content">
             
-              <header class="toolbar toolbar-header">
-                <div class="toolbar-actions">
-                  <div class="btn-group">
-                    <form action="">
-                      <input type="text" class="input-medium" />
+            <!-- Aportante -->
+            <div ng-show="menuCtrl.item === 1" class="aportante-page" ng-controller="aportanteController as aptCtrl">
+              <div class="table-aportantes">
+              
+                <header class="toolbar toolbar-header">
+                  <div class="toolbar-actions">
+                    <div class="btn-group">
+                      <form action="">
+                        <input type="text" class="input-medium" />
 
-                      <button class="btn btn-default">
-                        <span class="icon icon-search"></span>
+                        <button class="btn btn-default">
+                          <span class="icon icon-search"></span>
+                        </button>
+                      </form>
+
+                    </div>
+
+                    <div class="btn-group pull-right">
+                      <button class="btn btn-default" ng-click="aptCtrl.showFormToogle()">
+                        <span class="icon icon-text icon-user-add"></span>
+                        Nuevo
                       </button>
-                    </form>
-
+                      <button class="btn btn-default">
+                        <span class="icon icon-text icon-pencil"></span>
+                        Editar
+                      </button>
+                      <button class="btn btn-default">
+                        <span class="icon icon-text icon-cancel-squared"></span>
+                        Eliminar
+                      </button>
+                    </div>
                   </div>
+                </header>
 
-                  <div class="btn-group pull-right">
-                    <button class="btn btn-default">
-                      <span class="icon icon-text icon-user-add"></span>
-                      Nuevo
-                    </button>
-                    <button class="btn btn-default">
-                      <span class="icon icon-text icon-pencil"></span>
-                      Editar
-                    </button>
-                    <button class="btn btn-default">
-                      <span class="icon icon-text icon-cancel-squared"></span>
-                      Eliminar
-                    </button>
-                  </div>
-                </div>
-              </header>
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Nombres</th>
+                      <th>Dni</th>
+                      <th>Telefono</th>
+                      <th>Dirección</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="aportante in aptCtrl.aportantes">
+                      <td>{{aportante.nombres}} {{aportante.appaterno}} {{aportante.apmaterno}}</td>
+                      <td>{{aportante.dni}}</td>
+                      <td>{{aportante.telefono}}</td>
+                      <td>{{aportante.direccion}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div ng-show="aptCtrl.nuevo">
+                
+                  <header class="active tab-item toolbar toolbar-header">
+                    <span class="icon icon-cancel icon-close-tab" ng-click="aptCtrl.showFormToogle()"></span>
+                    Nuevo Aportante
+                  </header>
+                
+                
+                  <dl>
+                    <dt>Name:</dt>
+                    <dd>{{aptCtrl.aportante.nombres}}</dd>
+                    <dt>Apellidos:</dt>
+                    <dd>{{aptCtrl.aportante.appaterno}} {{aptCtrl.aportante.apmaterno}}</dd>
+                    <dt>DNI:</dt>
+                    <dd>{{aptCtrl.aportante.dni}}</dd>
+                    <dt>Dirección:</dt>
+                    <dd>{{aptCtrl.aportante.direccion}}</dd>
+                  </dl>
+                
+              </div>
+            </div>
 
-              <table class="table-striped">
-                <thead>
-                  <tr>
-                    <th>Nombres</th>
-                    <th>Dni</th>
-                    <th>Telefono</th>
-                    <th>Dirección</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>José Mariñas Collantes</td>
-                    <td>43267055</td>
-                    <td>976478682</td>
-                    <td>Pje. Chota 123</td>
-                  </tr>
-                  <tr>
-                    <td>José Mariñas Collantes</td>
-                    <td>43267055</td>
-                    <td>976478682</td>
-                    <td>Pje. Chota 123</td>
-                  </tr>
-                  <tr>
-                    <td>José Mariñas Collantes</td>
-                    <td>43267055</td>
-                    <td>976478682</td>
-                    <td>Pje. Chota 123</td>
-                  </tr>
-                  <tr>
-                    <td>José Mariñas Collantes</td>
-                    <td>43267055</td>
-                    <td>976478682</td>
-                    <td>Pje. Chota 123</td>
-                  </tr>
-                  <tr>
-                    <td>José Mariñas Collantes</td>
-                    <td>43267055</td>
-                    <td>976478682</td>
-                    <td>Pje. Chota 123</td>
-                  </tr>
-                  <tr>
-                    <td>José Mariñas Collantes</td>
-                    <td>43267055</td>
-                    <td>976478682</td>
-                    <td>Pje. Chota 123</td>
-                  </tr>
-                  <tr>
-                    <td>José Mariñas Collantes</td>
-                    <td>43267055</td>
-                    <td>976478682</td>
-                    <td>Pje. Chota 123</td>
-                  </tr>
-                </tbody>
-              </table>
+            <!-- Aportes Mensuales -->
+            <div ng-show="menuCtrl.item === 2" class="aporte-mensual-page">
+              <h4>Aportes Mensuales</h4>
+            </div>
+
+            <!-- Impresiones -->
+            <div ng-show="menuCtrl.item === 3" class="impresiones-page">
+              <h4>Impresiones</h4>
+            </div>
+
+            <!-- Reportes -->
+            <div ng-show="menuCtrl.item === 4" class="reportes-page">
+              <h4>Reportes</h4>
+            </div>
+
+            <!-- Configuración -->
+            <div ng-show="menuCtrl.item === 5" class="configuracion-page">
+              <h4>Configuración</h4>
+            </div>
           </div>
         </div>
       </section>
@@ -140,13 +167,7 @@
             <button class="btn btn-default pull-right">Cancel</button>
         </div>
       </footer>
-  </div>
-
-
-    <!-- <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>. -->
+    </div>
   </body>
   <script src="../js/app.js"></script>
 </html>
