@@ -3,8 +3,10 @@
 	var sqlite3 = require('sqlite3').verbose();
 	var path = require("path");
 	var angular = require("angular");
+	require('angular-ui-bootstrap');
 
-	var app = angular.module('mas', []);
+	var app = angular.module('mas', ['ui.bootstrap']);
+
 
 	app.controller('menuController', function () {
 		this.item = 1;
@@ -14,12 +16,22 @@
 		};
 	});
 
-	app.controller('aportanteController', function () {
+	app.controller('aportanteController', function ($scope, $uibModal) {
 		this.nuevo = false;
 
 		this.showFormToogle = function () {
 			this.nuevo = !this.nuevo;
 		}
+
+		$scope.newForm = function (size) {
+	    	var modalInstance = $uibModal.open({
+				animation: false,
+				templateUrl: 'newContribForm.html',
+				controller: 'ModalInstanceCtrl',
+				size: size,
+			});
+		};
+
 
 		this.aportante = {
 			id: "001",
@@ -66,6 +78,16 @@
 			apmaterno: "Abanto", dni: "40267022", direccion: "Pje. Inca 122", telefono: "976123456"
 		}];
 
+	});
+
+	app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance) {
+		$scope.close = function () {
+		    $uibModalInstance.close('close');
+		};
+
+		$scope.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
 	});
 
 })();

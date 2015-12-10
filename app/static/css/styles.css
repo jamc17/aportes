@@ -79,10 +79,15 @@ label {
 	padding-top: 1em;
 }
 
-/*.form {
-	margin: 1em;
+.modal-dialog {
+    width: 650px;
+    margin-top: 80px;
+}
+
+.modal-dialog .modal-body {
+	padding: 0;
+}
+
+.modal-dialog .modal-body .panel {
 	margin-bottom: 0;
-	padding: 1em;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}*/
+}
