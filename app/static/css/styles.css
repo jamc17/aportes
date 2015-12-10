@@ -1,3 +1,29 @@
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	padding: 8px;
+    line-height: 1.2;
+    font-size: .9em;
+}
+
+
+.form-control {
+    height: 30px;
+    padding: 4px 10px;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+label {
+	font-weight: bold;
+	font-size: .85em;
+	line-height: 1.2;
+}
+
+.form-horizontal .control-label {
+    padding-top: 4px;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 .content {
 	padding: 1em;
 }
@@ -50,4 +76,13 @@
 
 .main {
 	margin-top: 33px;
+	padding-top: 1em;
 }
+
+/*.form {
+	margin: 1em;
+	margin-bottom: 0;
+	padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}*/

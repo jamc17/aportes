@@ -16,53 +16,199 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" ng-controller="menuController as menuCtrl">
         <div class="col-sm-3 sidebar">
           <ul class="nav nav-pills nav-stacked">
-            <li>
-              <a href="">
+            <li ng-class="{active: menuCtrl.item === 1}">
+              <a ng-click="menuCtrl.selectItem(1)">
                 <span class="glyphicon glyphicon-user"></span>
                 Aportantes
               </a>
             </li>
 
-            <li class="active">
-              <a href="">
+            <li ng-class="{active: menuCtrl.item === 2}">
+              <a ng-click="menuCtrl.selectItem(2)">
                 <span class="glyphicon glyphicon-inbox"></span>
                 Aportes Mensuales
               </a>
             </li>
             
-            <li>
-              <a href="">
+            <li ng-class="{active: menuCtrl.item === 3}">
+              <a ng-click="menuCtrl.selectItem(3)">
                 <span class="glyphicon glyphicon-print"></span>
                 Impresiones
               </a>
             </li>
 
-            <li>
-              <a href="">
+            <li ng-class="{active: menuCtrl.item === 4}">
+              <a ng-click="menuCtrl.selectItem(4)">
                 <span class="glyphicon glyphicon-stats"></span>
                 Reportes
               </a>
             </li>
             
-            <li>
-              <a href="">
+            <li ng-class="{active: menuCtrl.item == 5}">
+              <a ng-click="menuCtrl.selectItem(5)">
                 <span class="glyphicon glyphicon-cog"></span>
                 Configuración
               </a>
             </li>
           </ul>
         </div>
+        <!-- MAIN CONTENT -->
         <div class="col-sm-9 col-sm-offset-3 main">
-          center panel asdf asdf asdf sadf sadf sadf asdf 
+          <!-- Aportantes -->
+          <div ng-show="menuCtrl.item === 1" ng-controller="aportanteController as aptCtrl">
+            <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">
+                <h3 class="panel-title">Listado total de aportantes: <span class="badge">{{aptCtrl.aportantes.length}}</span>
+                </h3>
+              </div>
+
+              <div class="panel-body">
+                <div class="row">
+                  <div class="form-buscar-head-panel col-sm-7">
+                    <form class="form-inline">
+                      <div class="form-group">
+                        <input type="text" class="form-control"placeholder="Buscar Aportante">
+
+                        <button type="submit" class="btn btn-primary">
+                          <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="text-right col-sm-5">
+                    <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-default" ng-click="aptCtrl.showFormToogle()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Nuevo
+                      </button>
+                      <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        Editar
+                      </button>
+                      <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Form Register contributor -->
+                <div class="row" ng-show="aptCtrl.nuevo">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Nuevo Aportante
+                        <button class="close pull-right" ng-click="aptCtrl.showFormToogle()">×</button>
+                      </h3>
+                    </div>
+                    
+                    <div class="panel-body">
+                      <form class="form-horizontal form">
+                        <div class="form-group">
+                          <label for="inputEmail3" class="col-sm-2 control-label">Nombres</label>
+                          <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Nombres">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="inputPassword3" class="col-sm-2 control-label">Apellido Paterno</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="Apellido Paterno">
+                          </div>
+
+                          <label for="inputPassword3" class="col-sm-2 control-label">Apellido Materno</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="Apellido Materno">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="inputPassword3" class="col-sm-2 control-label">DNI</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="DNI">
+                          </div>
+
+                          <label for="inputPassword3" class="col-sm-2 control-label">Teléfono</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" id="inputPassword3" placeholder="Teléfono">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="inputEmail3" class="col-sm-2 control-label">Escala</label>
+                          <div class="col-sm-5">
+                            <select class="form-control" id="inputEmail3">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button type="reset" class="btn btn-default">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Table list contributors -->
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombres</th>
+                    <th>DNI</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr ng-repeat="aportante in aptCtrl.aportantes">
+                    <td>{{$index + 1}}</td>
+                    <td>{{aportante.nombres}} {{aportante.appaterno}} {{aportante.apmaterno}}</td>
+                    <td>{{aportante.dni}}</td>
+                    <td>{{aportante.direccion}}</td>
+                    <td>{{aportante.telefono}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Aportes Mensuales -->
+          <div ng-show="menuCtrl.item === 2">
+            <h4>Aportes Mensuales</h4>
+          </div>
+
+          <!-- Impresiones -->
+          <div ng-show="menuCtrl.item === 3">
+            <h4>Impresiones</h4>
+          </div>
+
+          <!-- Reportes -->
+          <div ng-show="menuCtrl.item === 4">
+            <h4>Reportes</h4>
+          </div>
+
+          <!-- Configuración -->
+          <div ng-show="menuCtrl.item === 5">
+            <h4>Configuración</h4>
+          </div>
         </div>
       </div>
     </div>
 
-
-    
   </body>
   <script src="../js/app.js"></script>
 </html>
