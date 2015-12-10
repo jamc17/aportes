@@ -24,11 +24,13 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 728,
+    'min-width': 900,
+    'mineight': 600,
     'title-bar-style': 'hidden'
   });
   // console.log(process.cwd());
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/../static/html/index.html');
+  mainWindow.loadUrl('file://' + __dirname + '/../static/html/index2.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

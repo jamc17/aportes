@@ -3,15 +3,51 @@
 }
 
 .logo-title{
-	width: 28px;
+	width: 32px;
 }
 
 .text-title {
-	height: 28px;
-	line-height: 28px;
+	height: 32px;
+	line-height: 32px;
 	vertical-align: top;
 }
 
 .input-medium {
 	width: 20em;
+}
+
+.form-container {
+	padding: 1em 2em;
+}
+
+.header-app {
+	margin: 0;
+	padding: .5em !important;
+}
+
+.text-center {
+	text-align: center;
+}
+
+
+.navbar {
+	min-height: 32px !important;
+}
+
+.sidebar {
+    position: fixed;
+    top: 33px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+}
+
+.main {
+	margin-top: 33px;
 }

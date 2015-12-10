@@ -3,23 +3,25 @@
   <head>
     <meta>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/photon.min.css" />
+    <!-- <link rel="stylesheet" href="../css/photon.min.css" /> -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/styles.css" />
   </head>
   <body>
-    <div class="window">
-      <header class="toolbar toolbar-header">
-        <h1 class="title">
-          <img src="../img/logomas-small.png" alt="" class="logo-title">
-          <span class="text-title">Movimiento de Afirmación Social - Sistema de control de aportes</span>
-          
-        </h1>
-        <div></div>
-      </header>
-
-      <section class="window-content">
-        <div class="pane-group" ng-controller="menuController as menuCtrl">
-          <div class="pane pane-sm sidebar">
+    <div class="panel panel-default">
+      <!-- <header class="toolbar toolbar-header"> -->
+        <div class="panel-heading header-app">
+          <div class="title-panel">
+            <img src="../img/logomas-small.png" alt="" class="logo-title">
+            <span class="text-title">Movimiento de Afirmación Social - Sistema de control de aportes</span>
+          </div>
+        </div>
+      <!-- </header> -->
+        
+      <div class="panel-body">
+        
+          <div class="pane-group" ng-controller="menuController as menuCtrl">
+          <div class="span2">
             <!-- menu de navegación -->
             <ul class="nav-group">
               <h5 class="nav-group-title">Menu de opciones</h5>
@@ -60,7 +62,7 @@
             </nav>
           </div>
   
-          <div class="pane" id="main-content">
+          <div class="span10">
             
             <!-- Aportante -->
             <div ng-show="menuCtrl.item === 1" class="aportante-page" ng-controller="aportanteController as aptCtrl">
@@ -116,24 +118,28 @@
                 </table>
               </div>
               
-              <div ng-show="aptCtrl.nuevo">
-                
-                  <header class="active tab-item toolbar toolbar-header">
-                    <span class="icon icon-cancel icon-close-tab" ng-click="aptCtrl.showFormToogle()"></span>
-                    Nuevo Aportante
-                  </header>
-                
-                
-                  <dl>
-                    <dt>Name:</dt>
-                    <dd>{{aptCtrl.aportante.nombres}}</dd>
-                    <dt>Apellidos:</dt>
-                    <dd>{{aptCtrl.aportante.appaterno}} {{aptCtrl.aportante.apmaterno}}</dd>
-                    <dt>DNI:</dt>
-                    <dd>{{aptCtrl.aportante.dni}}</dd>
-                    <dt>Dirección:</dt>
-                    <dd>{{aptCtrl.aportante.direccion}}</dd>
-                  </dl>
+              <div ng-show="aptCtrl.nuevo">  
+                <header class="active tab-item">
+                  <span class="icon icon-cancel icon-close-tab" ng-click="aptCtrl.showFormToogle()"></span>
+                  Nuevo Aportante
+                </header>
+
+                <div class="form-container">
+                  <form action="">
+                    <div class="form-group">
+                      <label>Email address</label>
+                      <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                  </form>
+                </div>
                 
               </div>
             </div>
@@ -159,14 +165,8 @@
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <footer class="toolbar toolbar-footer">
-        <div class="toolbar-actions">
-          <button class="btn btn-primary pull-right">Save</button>
-            <button class="btn btn-default pull-right">Cancel</button>
-        </div>
-      </footer>
     </div>
   </body>
   <script src="../js/app.js"></script>
