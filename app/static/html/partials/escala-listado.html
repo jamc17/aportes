@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title">Escalas:
+      <span class="badge">{{escalas.length}}</span>
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="text-right col-sm-5 col-sm-offset-7">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default btn-sm" ng-click="newForm()">
+            <span class="glyphicon glyphicon-plus"></span>
+            Nuevo
+          </button>
+          <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-pencil"></span>
+            Editar
+          </button>
+          <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-remove"></span>
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Descripción</th>
+        <th>Monto</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="escala in escalas">
+        <td>{{$index + 1}}</td>
+        <td>{{escala.descripcion}}</td>
+        <td>{{escala.monto}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

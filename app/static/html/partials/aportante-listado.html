@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title">Listado total de aportantes:
+      <span class="badge">{{aportantes.length}}</span>
+    </h3>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="form-buscar-head-panel col-sm-7">
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control"placeholder="Buscar Aportante" />
+
+            <button type="submit" class="btn btn-primary btn-sm">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="text-right col-sm-5">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default btn-sm" ng-click="newForm()">
+            <span class="glyphicon glyphicon-plus"></span>
+            Nuevo
+          </button>
+          <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-pencil"></span>
+            Editar
+          </button>
+          <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-remove"></span>
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table list contributors -->
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombres</th>
+        <th>DNI</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Alta desde</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="aportante in aportantes">
+        <td>{{$index + 1}}</td>
+        <td>{{aportante.nombres}} {{aportante.appaterno}} {{aportante.apmaterno}}</td>
+        <td>{{aportante.dni}}</td>
+        <td>{{aportante.direccion}}</td>
+        <td>{{aportante.telefono}}</td>
+        <td>{{aportante.fechaRegistro | date: 'dd/MM/yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

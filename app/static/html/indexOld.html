@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html ng-app="mas">
+  <head>
+    <meta>
+    <meta charset="UTF-8">
+    <!-- <link rel="stylesheet" href="../css/photon.min.css" /> -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="panel panel-default">
+      <!-- <header class="toolbar toolbar-header"> -->
+        <div class="panel-heading header-app">
+          <div class="title-panel">
+            <img src="../img/logomas-small.png" alt="" class="logo-title">
+            <span class="text-title">Movimiento de Afirmación Social - Sistema de control de aportes</span>
+          </div>
+        </div>
+      <!-- </header> -->
+        
+      <div class="panel-body">
+        
+          <div class="pane-group" ng-controller="menuController as menuCtrl">
+          <div class="span2">
+            <!-- menu de navegación -->
+            <ul class="nav-group">
+              <h5 class="nav-group-title">Menu de opciones</h5>
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 1 }">
+                <a ng-click="menuCtrl.selectItem(1)">
+                  <span class="icon icon-users"></span>
+                  Aportantes
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 2 }">
+                <a ng-click="menuCtrl.selectItem(2)">
+                  <span class="icon icon-archive"></span>
+                  Aportes Mensuales
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 3 }">
+                <a ng-click="menuCtrl.selectItem(3)">
+                  <span class="icon icon-print"></span>
+                  Impresiones
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 4 }">
+                <a ng-click="menuCtrl.selectItem(4)">
+                  <span class="icon icon-chart-area"></span>
+                  Reportes
+                </a>
+              </li>
+
+              <li class="nav-group-item main-menu-item" ng-class="{ active: menuCtrl.item === 5 }">
+                <a ng-click="menuCtrl.selectItem(5)">
+                  <span class="icon icon-tools"></span>
+                  Configuración
+                </a>
+              </li>
+            </nav>
+          </div>
+  
+          <div class="span10">
+            
+            <!-- Aportante -->
+            <div ng-show="menuCtrl.item === 1" class="aportante-page" ng-controller="aportanteController as aptCtrl">
+              <div class="table-aportantes">
+              
+                <header class="toolbar toolbar-header">
+                  <div class="toolbar-actions">
+                    <div class="btn-group">
+                      <form action="">
+                        <input type="text" class="input-medium" />
+
+                        <button class="btn btn-default">
+                          <span class="icon icon-search"></span>
+                        </button>
+                      </form>
+
+                    </div>
+
+                    <div class="btn-group pull-right">
+                      <button class="btn btn-default" ng-click="aptCtrl.showFormToogle()">
+                        <span class="icon icon-text icon-user-add"></span>
+                        Nuevo
+                      </button>
+                      <button class="btn btn-default">
+                        <span class="icon icon-text icon-pencil"></span>
+                        Editar
+                      </button>
+                      <button class="btn btn-default">
+                        <span class="icon icon-text icon-cancel-squared"></span>
+                        Eliminar
+                      </button>
+                    </div>
+                  </div>
+                </header>
+
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Nombres</th>
+                      <th>Dni</th>
+                      <th>Telefono</th>
+                      <th>Dirección</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="aportante in aptCtrl.aportantes">
+                      <td>{{aportante.nombres}} {{aportante.appaterno}} {{aportante.apmaterno}}</td>
+                      <td>{{aportante.dni}}</td>
+                      <td>{{aportante.telefono}}</td>
+                      <td>{{aportante.direccion}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <div ng-show="aptCtrl.nuevo">  
+                <header class="active tab-item">
+                  <span class="icon icon-cancel icon-close-tab" ng-click="aptCtrl.showFormToogle()"></span>
+                  Nuevo Aportante
+                </header>
+
+                <div class="form-container">
+                  <form action="">
+                    <div class="form-group">
+                      <label>Email address</label>
+                      <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                  </form>
+                </div>
+                
+              </div>
+            </div>
+
+            <!-- Aportes Mensuales -->
+            <div ng-show="menuCtrl.item === 2" class="aporte-mensual-page">
+              <h4>Aportes Mensuales</h4>
+            </div>
+
+            <!-- Impresiones -->
+            <div ng-show="menuCtrl.item === 3" class="impresiones-page">
+              <h4>Impresiones</h4>
+            </div>
+
+            <!-- Reportes -->
+            <div ng-show="menuCtrl.item === 4" class="reportes-page">
+              <h4>Reportes</h4>
+            </div>
+
+            <!-- Configuración -->
+            <div ng-show="menuCtrl.item === 5" class="configuracion-page">
+              <h4>Configuración</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+  <script src="../js/app.js"></script>
+</html>

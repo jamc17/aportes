@@ -1,0 +1,72 @@
+<div class="modal-body">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Nuevo Aportante
+        <button class="close pull-right" ng-click="close()">×</button>
+      </h3>
+    </div>
+            
+    <div class="panel-body">
+      <form name="aportanteForm" class="form-horizontal form" ng-submit="aportanteForm.$valid && save()" novalidate>
+        <div class="form-group">
+          <label for="nombresAportante" class="col-sm-2 control-label">Nombres</label>
+          <div class="col-sm-10">
+            <input ng-model="aportante.nombres" type="text" class="form-control" id="nombresAportante" placeholder="Nombres" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="appaternoAportante" class="col-sm-2 control-label">Apellido Paterno</label>
+            <div class="col-sm-4">
+              <input ng-model="aportante.appaterno" type="text" class="form-control" id="appaternoAportante" placeholder="Apellido Paterno" required />
+            </div>
+
+            <label for="apmaternoAportante" class="col-sm-2 control-label">Apellido Materno</label>
+            <div class="col-sm-4">
+              <input ng-model="aportante.apmaterno" type="text" class="form-control" id="apmaternoAportante" placeholder="Apellido Materno" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="dniAportante" class="col-sm-2 control-label">DNI</label>
+            <div class="col-sm-4">
+              <input ng-model="aportante.dni" type="text" class="form-control" id="dniAportante" placeholder="DNI" />
+            </div>
+
+            <label for="telefonoAportante" class="col-sm-2 control-label">Teléfono</label>
+            <div class="col-sm-4">
+              <input ng-model="aportante.telefono" type="text" class="form-control" id="telefonoAportante" placeholder="Teléfono" />
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="direccionAportante" class="col-sm-2 control-label">Dirección</label>
+          <div class="col-sm-10">
+            <input ng-model="aportante.direccion" type="text" class="form-control" id="direccionAportante" placeholder="Dirección" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="escalaAportante" class="col-sm-2 control-label">Escala</label>
+          <div class="col-sm-5">
+            <select ng-model="aportante.escala" class="form-control" id="escalaAportante" required>
+              <option value="1">Gerentes Sede GRC</option>
+              <option value="2">Sub Gerentes Sede GRC</option>
+              <option value="3">CAS Nivel 1 Sede GRC</option>
+              <option value="4">CAS Nivel 2 Sede GRC</option>
+            </select>
+          </div>
+        </div>
+                
+        <div ng-show="saveState.state">{{saveState.msg}}</div>
+                
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="reset" class="btn btn-default btn-sm">Cancelar</button>
+            <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>  

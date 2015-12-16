@@ -30,7 +30,7 @@ app.on('ready', function() {
   });
   // console.log(process.cwd());
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/../static/html/index2.html');
+  mainWindow.loadUrl('file://' + __dirname + '/../static/html/index.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();

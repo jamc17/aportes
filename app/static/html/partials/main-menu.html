@@ -1,0 +1,36 @@
+<ul class="nav nav-pills nav-stacked">
+  <li ng-class="{active: menuCtrl.item === 1}">
+    <a ng-click="menuCtrl.selectItem(1)">
+      <span class="glyphicon glyphicon-user"></span>
+      Aportantes
+    </a>
+  </li>
+
+  <li ng-class="{active: menuCtrl.item === 2}">
+    <a ng-click="menuCtrl.selectItem(2)">
+      <span class="glyphicon glyphicon-inbox"></span>
+      Aportes Mensuales
+    </a>
+  </li>
+  
+  <li ng-class="{active: menuCtrl.item === 3}">
+    <a ng-click="menuCtrl.selectItem(3)">
+      <span class="glyphicon glyphicon-print"></span>
+      Impresiones
+    </a>
+  </li>
+
+  <li ng-class="{active: menuCtrl.item === 4}">
+    <a ng-click="menuCtrl.selectItem(4)">
+      <span class="glyphicon glyphicon-stats"></span>
+      Reportes
+    </a>
+  </li>
+  
+  <li ng-class="{active: menuCtrl.item == 5}">
+    <a ng-click="menuCtrl.selectItem(5)">
+      <span class="glyphicon glyphicon-cog"></span>
+      Configuración
+    </a>
+  </li>
+</ul>
