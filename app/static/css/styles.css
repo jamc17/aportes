@@ -99,3 +99,7 @@ label {
 .modal-dialog .modal-body .panel {
 	margin-bottom: 0;
 }
+
+.table-hover>tbody>tr:hover.selected, .selected {
+	background-color: #ededed;
+}

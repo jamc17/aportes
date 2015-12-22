@@ -9,20 +9,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="text-right col-sm-5 col-sm-offset-7">
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-default btn-sm" ng-click="newForm()">
-            <span class="glyphicon glyphicon-plus"></span>
-            Nuevo
-          </button>
-          <button type="button" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-pencil"></span>
-            Editar
-          </button>
-          <button type="button" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-remove"></span>
-            Eliminar
-          </button>
-        </div>
+        <listado-actions></listado-actions>
       </div>
     </div>
   </div>
@@ -37,12 +24,11 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="escala in escalas">
+      <tr ng-repeat="escala in escalas" ng-click="selectScale(escala.id)" ng-class="{selected: escala.id == selectedScale}">
         <td>{{$index + 1}}</td>
-        <td>{{escala.descripcion}}</td>
-        <td>{{escala.monto}}</td>
+        <td>{{escala.description}}</td>
+        <td>{{escala.amount}}</td>
       </tr>
     </tbody>
   </table>
-  
 </div>
