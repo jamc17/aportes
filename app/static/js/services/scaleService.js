@@ -16,7 +16,7 @@
 			function all () {
 				var deferred = $q.defer();
 
-				db.all("SELECT id, description, amount FROM scale", function(err, rows) {
+				db.all("SELECT id, description, amount, state FROM scale", function(err, rows) {
 					if (err) {
 						console.log(err);
 					}
@@ -47,12 +47,14 @@
 				return deferred.promise;
 			};
 
-			function edit(scaleId) {
+			function inactive(scale) {
+				var deferred = $q.defer();
+				db.run("UPDATE scale SET state = 0 WHERE id = $id", {$id: scale.id}, function (err) {
+						deferred.resolve(this.lastID);
+						console.log(this.lastID);
+				});
 
-			};
-
-			function inactive(scaleId) {
-
+				return deferred.promise;
 			};
 
 			function get(scaleId) {
@@ -75,7 +77,6 @@
 			return {
 				all: all,
 				save: save,
-				edit: edit,
 				destroy: inactive,
 				get: get
 			};

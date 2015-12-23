@@ -24,7 +24,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="escala in escalas" ng-click="selectScale(escala.id)" ng-class="{selected: escala.id == selectedScale}">
+      <tr ng-repeat="escala in escalas" ng-click="selectScale(escala.id)" ng-class="{selected: escala.id == selectedScale, inactive: escala.state == 0}">
         <td>{{$index + 1}}</td>
         <td>{{escala.description}}</td>
         <td>{{escala.amount}}</td>

@@ -92,6 +92,10 @@ label {
     margin-top: 80px;
 }
 
+.modal-dialog.modal-sm {
+	width: 400px;
+}
+
 .modal-dialog .modal-body {
 	padding: 0;
 }
@@ -100,6 +104,14 @@ label {
 	margin-bottom: 0;
 }
 
+.modal-footer {
+	padding-bottom: 0;
+}
+
 .table-hover>tbody>tr:hover.selected, .selected {
 	background-color: #ededed;
+}
+
+.inactive {
+	color: red;
 }

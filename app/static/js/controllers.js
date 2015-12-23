@@ -101,6 +101,28 @@
 
 			};
 
+			$scope.deleteForm = function (size) {
+				var modalInstance = $uibModal.open({
+					animation: false,
+					templateUrl: '../html/partials/delete-scale.html',
+					controller: 'DeleteEscalaModalCtrl',
+					backdrop: 'static',
+					size: size,
+					resolve: {
+						escala: function () {
+							return $scope.escala;
+						}
+					}
+				});
+
+				modalInstance.result.then(function () {
+					scaleService.all().then(function (data) {
+						$scope.escalas = data;
+						$scope.escala = {};
+					})
+				});
+			}
+
 			$scope.add = function () {
 				$scope.escala = {};
 				$scope.newForm();
@@ -114,6 +136,18 @@
 					scaleService.get($scope.selectedScale).then(function (data) {
 						$scope.escala = data;
 						$scope.newForm();
+					});
+				}
+			};
+
+			$scope.delete = function () {
+				if (!$scope.selectedScale) {
+					return;
+				}
+				else {
+					scaleService.get($scope.selectedScale).then(function (data) {
+						$scope.escala = data;
+						$scope.deleteForm('sm');
 					});
 				}
 			};
@@ -144,8 +178,20 @@
 			};
 		}])
 
-
-		.controller('escalaDbCtrl', ['$scope','scaleService', function ($scope, scaleService) {
+		.controller('DeleteEscalaModalCtrl', ['$scope','$uibModalInstance', 'scaleService', 'escala', function ($scope, $uibModalInstance, scaleService, escala) {
 			
+			$scope.cancel= function () {
+			    $uibModalInstance.dismiss('close');
+			};
+
+			$scope.escala = escala;
+
+			$scope.delete = function () {
+				scaleService.destroy($scope.escala).then(function (lastId) {
+					$scope.$close();
+				});
+			};
 		}])
+
+		
 })();
