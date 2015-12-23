@@ -86,11 +86,36 @@
 					backdrop: 'static',
 					size: size,
 					resolve: {
-						escalas: function () {
-							return $scope.escalas;
+						escala: function () {
+							return $scope.escala;
 						}
 					}
 				});
+
+				modalInstance.result.then(function () {
+					scaleService.all().then(function (data) {
+						$scope.escalas = data;
+						$scope.escala = {};
+					})
+				});
+
+			};
+
+			$scope.add = function () {
+				$scope.escala = {};
+				$scope.newForm();
+			};
+
+			$scope.edit = function () {
+				if (!$scope.selectedScale) {
+					return;
+				}
+				else {
+					scaleService.get($scope.selectedScale).then(function (data) {
+						$scope.escala = data;
+						$scope.newForm();
+					});
+				}
 			};
 
 			scaleService.all().then(function (data) {
@@ -104,29 +129,18 @@
 
 		}])
 
-		.controller('EscalaModalInstanceCtrl', ['$scope','$uibModalInstance', 'scaleService','escalas', function ($scope, $uibModalInstance, scaleService , escalas) {
-			$scope.close = function () {
-			    $uibModalInstance.close('close');
+		.controller('EscalaModalInstanceCtrl', ['$scope','$uibModalInstance', 'scaleService', 'escala', function ($scope, $uibModalInstance, scaleService, escala) {
+			
+			$scope.cancel= function () {
+			    $uibModalInstance.dismiss('close');
 			};
 
-			$scope.escala = {};
-
-			$scope.saveState = {
-				state: false,
-				msg: ""
-			};
+			$scope.escala = escala;
 
 			$scope.save = function () {
-				$scope.saveState.state = true;
-				// $scope.saveState.msg = "Data saved ok!!"
-
 				scaleService.save($scope.escala).then(function (lastId) {
-					$scope.escala.id = lastId;
-					escalas.push($scope.escala);
-					$scope.escala = {};
+					$scope.$close();
 				});
-				
-				$scope.close();
 			};
 		}])
 

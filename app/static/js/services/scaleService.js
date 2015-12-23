@@ -28,20 +28,56 @@
 
 			function save(scale) {
 				var deferred = $q.defer();
-				db.run("INSERT INTO scale (description, amount) VALUES ($desc, $amount)", {
+				var stmt = "INSERT INTO scale (description, amount) VALUES ($desc, $amount)";
+
+				if (scale.id) {
+					stmt = "UPDATE scale SET description = $desc, amount = $amount WHERE id = $id"
+				}
+
+				db.run(stmt, {
 						$desc: scale.description,
-						$amount: scale.amount
+						$amount: scale.amount,
+						$id: scale.id
 					}, function (err) {
 						deferred.resolve(this.lastID);
+						console.log(this.lastID);
 					}
 				);
 
 				return deferred.promise;
 			};
 
+			function edit(scaleId) {
+
+			};
+
+			function inactive(scaleId) {
+
+			};
+
+			function get(scaleId) {
+				var deferred = $q.defer();
+
+				db.get("SELECT id, description, amount FROM scale WHERE id = $id",
+					{
+						$id: scaleId
+					},
+					function(err, row) {
+						if (err) {
+							console.log(err);
+						}
+						deferred.resolve(row);
+				});
+
+				return deferred.promise;
+			};
+
 			return {
 				all: all,
-				save: save
+				save: save,
+				edit: edit,
+				destroy: inactive,
+				get: get
 			};
 
 		}])
