@@ -8,6 +8,8 @@
 	var app = angular.module('mas', [
 		'ui.bootstrap',
 		'mas.controllers',
+		'mas.aportanteController',
+		'mas.aporteMensualController',
 		'mas.directives']);
 
 

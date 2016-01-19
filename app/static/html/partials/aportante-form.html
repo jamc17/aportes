@@ -11,7 +11,7 @@
         <div class="form-group">
           <label for="nombresAportante" class="col-sm-2 control-label">Nombres</label>
           <div class="col-sm-10">
-            <input ng-model="aportante.nombres" type="text" class="form-control" id="nombresAportante" placeholder="Nombres" required />
+            <input ng-model="aportante.name" type="text" class="form-control" id="nombresAportante" placeholder="Nombres" required />
           </div>
         </div>
 
@@ -35,25 +35,23 @@
 
             <label for="telefonoAportante" class="col-sm-2 control-label">Teléfono</label>
             <div class="col-sm-4">
-              <input ng-model="aportante.telefono" type="text" class="form-control" id="telefonoAportante" placeholder="Teléfono" />
+              <input ng-model="aportante.phone" type="text" class="form-control" id="telefonoAportante" placeholder="Teléfono" />
             </div>
         </div>
 
         <div class="form-group">
           <label for="direccionAportante" class="col-sm-2 control-label">Dirección</label>
           <div class="col-sm-10">
-            <input ng-model="aportante.direccion" type="text" class="form-control" id="direccionAportante" placeholder="Dirección" />
+            <input ng-model="aportante.address" type="text" class="form-control" id="direccionAportante" placeholder="Dirección" />
           </div>
         </div>
 
         <div class="form-group">
           <label for="escalaAportante" class="col-sm-2 control-label">Escala</label>
           <div class="col-sm-5">
-            <select ng-model="aportante.escala" class="form-control" id="escalaAportante" required>
-              <option value="1">Gerentes Sede GRC</option>
-              <option value="2">Sub Gerentes Sede GRC</option>
-              <option value="3">CAS Nivel 1 Sede GRC</option>
-              <option value="4">CAS Nivel 2 Sede GRC</option>
+            <select ng-model="aportante.scaleid" class="form-control" id="escalaAportante" required>
+              <option>-- Seleccione una escala --</option>
+              <option ng-repeat="escala in escalas"  value="{{escala.id}}">{{escala.description}}</option>
             </select>
           </div>
         </div>

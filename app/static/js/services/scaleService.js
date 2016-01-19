@@ -26,6 +26,18 @@
 				return deferred.promise;
 			};
 
+			function getActives () {
+				var deferred = $q.defer();
+				db.all("SELECT id, description, amount FROM scale WHERE state = 1", function (err, rows) {
+					if (err) {
+						console.log(err);
+					}
+					deferred.resolve(rows);
+				})
+
+				return deferred.promise;
+			}
+
 			function save(scale) {
 				var deferred = $q.defer();
 				var stmt = "INSERT INTO scale (description, amount) VALUES ($desc, $amount)";
@@ -76,6 +88,7 @@
 
 			return {
 				all: all,
+				getActives: getActives,
 				save: save,
 				destroy: inactive,
 				get: get

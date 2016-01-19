@@ -18,6 +18,10 @@ label {
 	line-height: 1.2;
 }
 
+hr {
+	margin: .5em;
+}
+
 .form-horizontal .control-label {
     padding-top: 4px;
 }
@@ -114,4 +118,5 @@ label {
 
 .inactive {
 	color: red;
+	text-decoration: line-through;
 }

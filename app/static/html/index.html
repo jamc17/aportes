@@ -28,8 +28,8 @@
           </div>
 
           <!-- Aportes Mensuales -->
-          <div ng-show="menuCtrl.item === 2">
-            <h4>Aportes Mensuales</h4>
+          <div ng-show="menuCtrl.item === 2" ng-controller="aporteMensualController">
+            <aporte-mensual-page></aportes-mensual-page>
           </div>
 
           <!-- Impresiones -->
@@ -52,7 +52,11 @@
 
     <script src="../js/app.js"></script>
     <script src="../js/services/scaleService.js"></script>
+    <script src="../js/services/contributorService.js"></script>
+    <script src="../js/services/aporteMensualService.js"></script>
     <script src="../js/directives.js"></script>
     <script src="../js/controllers.js"></script>
+    <script src="../js/aportanteController.js"></script>
+    <script src="../js/aporteMensualController.js"></script>
   </body>
 </html>

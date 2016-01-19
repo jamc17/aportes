@@ -27,4 +27,11 @@
 				templateUrl: '../html/partials/listado-actions.html'
 			}
 		})
+
+		.directive('aporteMensualPage', function () {
+			return {
+				restrict: 'E',
+				templateUrl: '../html/partials/aporte-mensual-listado.html'
+			}
+		})
 })();

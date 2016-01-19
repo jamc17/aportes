@@ -33,6 +33,7 @@
         <th>#</th>
         <th>Nombres</th>
         <th>DNI</th>
+        <th>Escala</th>
         <th>Dirección</th>
         <th>Teléfono</th>
         <th>Alta desde</th>
@@ -42,11 +43,12 @@
     <tbody>
       <tr ng-repeat="aportante in aportantes" ng-click="selectContributor(aportante.id)" ng-class="{selected: aportante.id === selectedContributor}">
         <td>{{$index + 1}}</td>
-        <td>{{aportante.nombres}} {{aportante.appaterno}} {{aportante.apmaterno}}</td>
+        <td>{{aportante.name}} {{aportante.appaterno}} {{aportante.apmaterno}}</td>
         <td>{{aportante.dni}}</td>
-        <td>{{aportante.direccion}}</td>
-        <td>{{aportante.telefono}}</td>
-        <td>{{aportante.fechaRegistro | date: 'dd/MM/yyyy'}}</td>
+        <td>{{aportante.scaleid}}</td>
+        <td>{{aportante.address}}</td>
+        <td>{{aportante.phone}}</td>
+        <td>{{aportante.dateup | date: 'dd/MM/yyyy'}}</td>
       </tr>
     </tbody>
   </table>
