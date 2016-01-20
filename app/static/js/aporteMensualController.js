@@ -20,7 +20,21 @@
 				$scope.years.push(i);
 			}
 
-			$scope.months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+			$scope.months = [
+				{id: 0, name: 'Enero'},
+				{id: 1, name: 'Febrero'},
+				{id: 2, name: 'Marzo'},
+				{id: 3, name: 'Abril'},
+				{id: 4, name: 'Mayo'},
+				{id: 5, name: 'Junio'},
+				{id: 6, name: 'Julio'},
+				{id: 7, name: 'Agosto'},
+				{id: 8, name: 'Septiembre'},
+				{id: 9, name: 'Octubre'},
+				{id: 10, name: 'Noviembre'},
+				{id: 11, name: 'Diciembre'}
+			];
 
 			$scope.dateContrib = date;
 
@@ -35,22 +49,33 @@
 				$scope.escalas = data;
 			});
 
-			
-
 			$scope.saveAll = function () {
 				aporteMensualService.saveAll($scope.aportantes).then(function () {
-					$scope.allAportantes();
+					// $scope.allAportantes();
+					$scope.aportesByMonth();
 				});
 			}
-
 
 			$scope.allAportantes = function () {
 				aporteMensualService.all().then(function (data) {
 					$scope.aportantes = data;
 				});
-			}
+			};
 
-			$scope.allAportantes();
+
+			$scope.monthSelected = 0;
+			$scope.yearSelected = 0;
+
+			$scope.aportesByMonth = function () {
+				var periodo = {year: $scope.yearSelected, month: $scope.monthSelected};
+
+				aporteMensualService.allByPeriod(periodo).then(function (data) {
+					$scope.aportantes = data;
+				});
+			};
+
+			// $scope.allAportantes();
+			$scope.aportesByMonth();
 
 			$scope.printAportantes = function () {
 				doc = new PDFDocument({
@@ -61,7 +86,10 @@
 
 				stream = doc.pipe(blobStream());
 				
-				aporteMensualService.all().then(function (aportantes) {
+				var periodo = {year: $scope.yearSelected, month: $scope.monthSelected};
+
+				aporteMensualService.allByPeriod(periodo).then(function (aportantes) {
+
 					for (var i = 0; i < aportantes.length; i++) {
 						for (var j = 0; j < 4; j++) {
 							

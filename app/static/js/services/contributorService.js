@@ -24,7 +24,7 @@
 			function all() {
 				var deferred = $q.defer();
 
-				db.all("SELECT * FROM contributor", function(err, rows) {
+				db.all("SELECT c.id, c.name, c.appaterno, c.apmaterno, c.dni, c.address, c.phone, c.dateup, c.scaleid, s.amount  FROM contributor as c INNER JOIN scale as s ON c.scaleid = s.id", function(err, rows) {
 					if (err) {
 						console.log(err);
 					}
@@ -58,8 +58,6 @@
 				if (contributor.id) {
 					stmt = "UPDATE contributor SET name = $name, appaterno = $appaterno, apmaterno = $apmaterno, dni = $dni, address = $address, phone = $phone, dateup = $dateup, scaleid = $scaleid WHERE id = $id"
 				}
-
-
 
 				db.run(stmt, {
 						$name: contributor.name,

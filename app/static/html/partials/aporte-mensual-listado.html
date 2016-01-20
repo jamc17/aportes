@@ -11,14 +11,14 @@
       <div class="form-buscar-head-panel col-sm-7">
         <form class="form-inline">
 			<div class="form-group">
-            	<select name="year" id="year" class="form-control">
+            	<select name="year" id="year" ng-model="yearSelected" class="form-control">
             		<option ng-repeat="year in years" value="{{year}}">{{year}}</option>
             	</select>
         	</div>
 			
 			<div class="form-group">
-            	<select name="month" id="month" class="form-control">
-            		<option ng-repeat="month in months" value="{{month}}">{{month}}</option>
+            	<select name="month" id="month" class="form-control" ng-model="monthSelected" ng-change="aportesByMonth()">
+            		<option ng-repeat="month in months" value="{{month.id}}">{{month.name}}</option>
             	</select>
             </div>
 

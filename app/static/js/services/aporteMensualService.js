@@ -5,18 +5,18 @@
 
 	//Creamos la tabla scale si no existe
 	db.serialize(function() {
-		db.run("CREATE TABLE IF NOT EXISTS aporte_mensual (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, num_rec INTEGER DEFAULT 0, aportante_id INTEGER NOT NULL, year TEXT NOT NULL, month TEXT NOT NULL, amount DOUBLE, dateContrib DATE NOT NULL, state INTEGER DEFAULT 0, FOREIGN KEY (aportante_id) REFERENCES contributor(id))");
+		db.run("CREATE TABLE IF NOT EXISTS aporte_mensual (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, num_rec INTEGER DEFAULT 0, aportante_id INTEGER NOT NULL, periodo_id INTEGER NOT NULL, amount DOUBLE, dateContrib DATE, state INTEGER DEFAULT 0, FOREIGN KEY (aportante_id) REFERENCES contributor(id), FOREIGN KEY (periodo_id) REFERENCES periodo(id))");
 	});
 
 
-	angular.module('mas.aporteMensualServices', [])
+	angular.module('mas.aporteMensualServices', ['mas.contributorServices'])
 
-		.factory('aporteMensualService', ['$q', '$timeout', function ($q, $timeout) {
+		.factory('aporteMensualService', ['$q', '$timeout', 'contributorService', function ($q, $timeout, contributorService) {
 
 			function all () {
 				var deferred = $q.defer();
 
-				var query = "SELECT am.id, am.num_rec, c.name, c.appaterno, c.apmaterno, c.dni, c.address, am.year, am.month, am.amount, am.dateContrib FROM aporte_mensual as am INNER JOIN contributor as c ON am.aportante_id = c.id"
+				var query = "SELECT am.id, am.num_rec, c.name, c.appaterno, c.apmaterno, c.dni, c.address, p.year, p.month, am.amount, am.dateContrib FROM aporte_mensual as am INNER JOIN contributor as c ON am.aportante_id = c.id INNER JOIN periodo as p ON am.periodo_id = p.id"
 
 				db.all(query, function(err, rows) {
 					if (err) {
@@ -28,17 +28,26 @@
 				return deferred.promise;
 			};
 
-			function getActives () {
+			function allByPeriod (period) {
 				var deferred = $q.defer();
-				db.all("SELECT id, description, amount FROM scale WHERE state = 1", function (err, rows) {
-					if (err) {
-						console.log(err);
+
+				var query = "SELECT am.id, am.num_rec, c.name, c.appaterno, c.apmaterno, c.dni, c.address, p.year, p.month, am.amount, am.dateContrib FROM aporte_mensual as am INNER JOIN contributor as c ON am.aportante_id = c.id INNER JOIN periodo as p ON am.periodo_id = p.id WHERE p.year = $year AND p.month = $month";
+
+				db.all(query, {
+						$year: period.year,
+						$month: period.month
+					},
+					function(err, rows) {
+						if (err) {
+							console.log(err);
+						}
+						deferred.resolve(rows);
 					}
-					deferred.resolve(rows);
-				})
+				);
 
 				return deferred.promise;
 			};
+
 
 			function getLastNumRec () {
 				var deferred = $q.defer();
@@ -116,69 +125,39 @@
 				return deferred.promise;
 			};
 
-			function save(scale) {
-				var deferred = $q.defer();
-				var stmt = "INSERT INTO scale (description, amount) VALUES ($desc, $amount)";
 
-				if (scale.id) {
-					stmt = "UPDATE scale SET description = $desc, amount = $amount WHERE id = $id"
-				}
 
-				db.run(stmt, {
-						$desc: scale.description,
-						$amount: scale.amount,
-						$id: scale.id
-					}, function (err) {
-						deferred.resolve(this.lastID);
-						console.log(this.lastID);
+			function copiarAportantes(periodo) {
+				contributorService.all().then(function (contributors) {
+					var deferred = $q.defer();
+
+					var stmt = "";
+					for (var i = 0; i < contributors.length; i++) {
+						stmt = "INSERT INTO aporte_mensual (aportante_id, periodo_id, amount) VALUES ($aportante_id, $periodo_id, $amount)";
+
+						db.run(stmt, {
+							$aportante_id: contributors[i].id,
+							$periodo_id: periodo,
+							$amount: contributors[i].amount
+						}, function (err) {
+							if (err) {
+								console.log(err);
+							}
+							deferred.resolve(this.lastID);
+						});
 					}
-				);
 
-				return deferred.promise;
-			};
-
-			function inactive(scale) {
-				var deferred = $q.defer();
-				db.run("UPDATE scale SET state = 0 WHERE id = $id", {$id: scale.id}, function (err) {
-						deferred.resolve(this.lastID);
-						console.log(this.lastID);
+					return deferred.promise;
 				});
-
-				return deferred.promise;
-			};
-
-			function get(scaleId) {
-				var deferred = $q.defer();
-
-				db.get("SELECT id, description, amount FROM scale WHERE id = $id",
-					{
-						$id: scaleId
-					},
-					function(err, row) {
-						if (err) {
-							console.log(err);
-						}
-						deferred.resolve(row);
-				});
-
-				return deferred.promise;
-			};
-
-
-			function copiarAportantes() {
-				console.log("Insertamos aportantes");
 			};
 
 
 			return {
 				all: all,
-				getActives: getActives,
-				save: save,
 				saveAll: saveAll,
-				destroy: inactive,
-				get: get,
 				getLastNumRec: getLastNumRec,
-				copiarAportantes: copiarAportantes
+				copiarAportantes: copiarAportantes,
+				allByPeriod: allByPeriod
 			};
 
 		}])
