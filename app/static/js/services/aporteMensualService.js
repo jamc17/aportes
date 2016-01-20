@@ -164,6 +164,12 @@
 				return deferred.promise;
 			};
 
+
+			function copiarAportantes() {
+				console.log("Insertamos aportantes");
+			};
+
+
 			return {
 				all: all,
 				getActives: getActives,
@@ -171,7 +177,8 @@
 				saveAll: saveAll,
 				destroy: inactive,
 				get: get,
-				getLastNumRec: getLastNumRec
+				getLastNumRec: getLastNumRec,
+				copiarAportantes: copiarAportantes
 			};
 
 		}])

@@ -21,6 +21,13 @@
 			}
 		})
 
+		.directive('periodoPage', function () {
+			return {
+				restrict: 'E',
+				templateUrl: '../html/partials/periodo-listado.html'
+			}
+		})
+
 		.directive('listadoActions', function () {
 			return {
 				restrict: 'E',

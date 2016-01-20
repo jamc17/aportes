@@ -1,0 +1,30 @@
+<div class="panel panel-default" ng-controller="periodoController">
+  <!-- Default panel contents -->
+  <div class="panel-heading">
+    <h3 class="panel-title">Períodos:
+      <span class="badge">{{periodos.length}}</span>
+    </h3>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Año</th>
+        <th>Mes</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="periodo in periodos" ng-click="selectPeriodo(periodo.id)" ng-class="{selected: periodo.id == selectedPeriodo, periodoAbierto: periodo.state == 0}">
+        <td>{{$index + 1}}</td>
+        <td>{{periodo.year}}</td>
+        <td>{{periodo.month}}</td>
+        <td>{{periodo.state == 0 ? "Abierto" : "Cerrado"}}</td>
+        <td><button ng-show="!periodo.state" class="btn btn-sm btn-default" ng-click="cerrarPeriodo(periodo)">Cerrar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -8,9 +8,8 @@
 	var app = angular.module('mas', [
 		'ui.bootstrap',
 		'mas.controllers',
+		'mas.periodoController',
 		'mas.aportanteController',
 		'mas.aporteMensualController',
 		'mas.directives']);
-
-
 })();

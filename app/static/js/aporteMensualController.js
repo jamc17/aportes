@@ -60,13 +60,6 @@
 				});
 
 				stream = doc.pipe(blobStream());
-
-				// doc.font('Times-Roman')
-				//    .fontSize(16)
-				//    .text('Movimiento de Afirmación Social MAS!', {
-			 //   			align: 'center',
-			 //   			underline: true
-				//    });
 				
 				aporteMensualService.all().then(function (aportantes) {
 					for (var i = 0; i < aportantes.length; i++) {
@@ -116,7 +109,7 @@
 								pos.amountBod.cx = pos.amountBod.cx + 400;
 								pos.month.cx = pos.month.cx + 400;
 								pos.date.cx = pos.date.cx + 400;
-
+								//------------------------------ 
 								pos.numRec.cy = pos.numRec.cy + 260;
 								pos.amountCab.cy = pos.amountCab.cy + 260;
 								pos.names.cy = pos.names.cy + 260;
@@ -155,15 +148,12 @@
 							}
 						}
 					}
-					
 
 					doc.end();
 
 					var iframe = document.getElementById("pdfDisplay");
 
 					stream.on('finish', function () {
-
-						// url = stream.toBlobURL('application/pdf');
 						iframe.src = stream.toBlobURL('application/pdf');
 					})
 				});
