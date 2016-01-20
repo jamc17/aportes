@@ -16,7 +16,7 @@
 			function all () {
 				var deferred = $q.defer();
 
-				var query = "SELECT am.id, am.num_rec, c.name, c.appaterno, c.apmaterno, am.year, am.month, am.amount, am.dateContrib FROM aporte_mensual as am INNER JOIN contributor as c ON am.aportante_id = c.id"
+				var query = "SELECT am.id, am.num_rec, c.name, c.appaterno, c.apmaterno, c.dni, c.address, am.year, am.month, am.amount, am.dateContrib FROM aporte_mensual as am INNER JOIN contributor as c ON am.aportante_id = c.id"
 
 				db.all(query, function(err, rows) {
 					if (err) {
