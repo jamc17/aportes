@@ -52,7 +52,7 @@
 						$id: scale.id
 					}, function (err) {
 						deferred.resolve(this.lastID);
-						console.log(this.lastID);
+						// console.log(this.lastID);
 					}
 				);
 
